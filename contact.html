@@ -1,0 +1,51 @@
+<!-- contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - DavaXbott</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div id="backdrop" onclick="toggleSidebar()"></div>
+<div class="menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></div>
+<div class="sidebar" id="sidebar">
+  <div class="user-info">
+    <i class="fa-solid fa-user-shield"></i>
+    <div><span id="sidebarUsername">DavaXbott</span></div>
+  </div>
+  <h3><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></h3>
+  <h3><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></h3>
+  <h3><a href="#" onclick="showPage('source')"><i class="fas fa-code"></i> Source Grab</a></h3>
+  <h3><a href="#" onclick="showPage('myip')"><i class="fas fa-network-wired"></i> IP Saya</a></h3>
+  <h3><a href="#" onclick="showPage('headers')"><i class="fas fa-headers"></i> Headers</a></h3>
+  <h3><a href="#" onclick="showPage('domainip')"><i class="fas fa-globe"></i> IP Domain</a></h3>
+  <h3><a href="#" onclick="showPage('geoip')"><i class="fas fa-map-marked-alt"></i> GeoIP</a></h3>
+  <h3><a href="#" onclick="showPage('dns')"><i class="fas fa-server"></i> DNS Lookup</a></h3>
+  <h3><a href="#" onclick="showPage('minify')"><i class="fas fa-compress-alt"></i> HTML Minify</a></h3>
+  <h3><a href="#" onclick="showPage('subdomain')"><i class="fas fa-sitemap"></i> Subdomain</a></h3>
+  <h3><a href="#" onclick="showPage('crawler')"><i class="fas fa-spider"></i> Crawler</a></h3>
+  <h3><a href="#" onclick="showPage('hash')"><i class="fas fa-hashtag"></i> Hash Gen</a></h3>
+  <h3><a href="#" onclick="showPage('converter')"><i class="fas fa-exchange-alt"></i> Converter</a></h3>
+  <h3><a href="#" onclick="showPage('reverseip')"><i class="fas fa-undo-alt"></i> Reverse IP</a></h3>
+  <h3><a href="#" onclick="showPage('jso')"><i class="fas fa-code-branch"></i> JSO Gen</a></h3>
+  <h3><a href="#" onclick="showPage('admin')"><i class="fas fa-user-secret"></i> Admin Finder</a></h3>
+  <h3><a href="#" onclick="showPage('phpobf')"><i class="fab fa-php"></i> PHP Obf</a></h3>
+  <h3><a href="#" onclick="showPage('csrf')"><i class="fas fa-shield-alt"></i> CSRF Test</a></h3>
+  <h3><a href="#" onclick="showPage('dos')"><i class="fas fa-bolt"></i> Layer7 DoS</a></h3>
+  <div class="logout-btn"><h3><a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Log out</a></h3></div>
+</div>
+<div class="center">
+  <div class="card contact-card">
+    <h2><i class="fa-solid fa-envelope"></i> Contact</h2>
+    <div class="contact-info">
+      <p><i class="fa-brands fa-telegram"></i> <b>Telegram:</b> @DavaXbott</p>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
