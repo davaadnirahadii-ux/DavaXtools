@@ -1,0 +1,255 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dava Tools V2</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div id="backdrop" onclick="toggleSidebar()"></div>
+<div class="menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></div>
+<div class="sidebar" id="sidebar">
+  <div class="user-info">
+    <i class="fa-solid fa-user-shield"></i>
+    <div><span id="sidebarUsername">DavaXbott</span></div>
+  </div>
+  <h3><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></h3>
+  <h3><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></h3>
+  <h3><a href="#" onclick="showPage('source')"><i class="fas fa-code"></i> Source Grab</a></h3>
+  <h3><a href="#" onclick="showPage('myip')"><i class="fas fa-network-wired"></i> IP Saya</a></h3>
+  <h3><a href="#" onclick="showPage('headers')"><i class="fas fa-headers"></i> Headers</a></h3>
+  <h3><a href="#" onclick="showPage('domainip')"><i class="fas fa-globe"></i> IP Domain</a></h3>
+  <h3><a href="#" onclick="showPage('geoip')"><i class="fas fa-map-marked-alt"></i> GeoIP</a></h3>
+  <h3><a href="#" onclick="showPage('dns')"><i class="fas fa-server"></i> DNS Lookup</a></h3>
+  <h3><a href="#" onclick="showPage('minify')"><i class="fas fa-compress-alt"></i> HTML Minify</a></h3>
+  <h3><a href="#" onclick="showPage('subdomain')"><i class="fas fa-sitemap"></i> Subdomain</a></h3>
+  <h3><a href="#" onclick="showPage('crawler')"><i class="fas fa-spider"></i> Crawler</a></h3>
+  <h3><a href="#" onclick="showPage('hash')"><i class="fas fa-hashtag"></i> Hash Gen</a></h3>
+  <h3><a href="#" onclick="showPage('converter')"><i class="fas fa-exchange-alt"></i> Converter</a></h3>
+  <h3><a href="#" onclick="showPage('reverseip')"><i class="fas fa-undo-alt"></i> Reverse IP</a></h3>
+  <h3><a href="#" onclick="showPage('jso')"><i class="fas fa-code-branch"></i> JSO Gen</a></h3>
+  <h3><a href="#" onclick="showPage('admin')"><i class="fas fa-user-secret"></i> Admin Finder</a></h3>
+  <h3><a href="#" onclick="showPage('phpobf')"><i class="fab fa-php"></i> PHP Obf</a></h3>
+  <h3><a href="#" onclick="showPage('csrf')"><i class="fas fa-shield-alt"></i> CSRF Test</a></h3>
+  <h3><a href="#" onclick="showPage('dos')"><i class="fas fa-bolt"></i> Layer7 DoS</a></h3>
+  <div class="logout-btn"><h3><a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Log out</a></h3></div>
+</div>
+<div class="center">
+  <div class="card">
+    <h1>Dava Tools V2</h1>
+    <p class="subtitle">A comprehensive security & pentesting toolkit</p>
+    <div class="date-time" id="dateTime"></div>
+  </div>
+</div>
+<div id="source" class="page">
+  <h2><i class="fas fa-code"></i> Source Grabber</h2>
+  <label>URL</label>
+  <input type="text" id="srcUrl" placeholder="https://example.com">
+  <button onclick="getSource()"><i class="fas fa-download"></i> Get Source</button>
+  <textarea id="srcResult" placeholder="Source code result..." readonly></textarea>
+  <div class="btn-group">
+    <button onclick="copyText('srcResult')"><i class="fas fa-copy"></i> Copy</button>
+    <button onclick="downloadText('srcResult','source.html')"><i class="fas fa-file-download"></i> Download</button>
+    <button onclick="clearResult('srcResult','srcStatus')"><i class="fas fa-eraser"></i> Clear</button>
+  </div>
+  <div id="srcStatus" class="status"></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="myip" class="page">
+  <h2><i class="fas fa-network-wired"></i> My IP</h2>
+  <div id="ipResult" class="result-box">Loading...</div>
+  <div class="btn-group"><button onclick="clearResult('ipResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="headers" class="page">
+  <h2><i class="fas fa-headers"></i> Headers Check</h2>
+  <label>URL</label>
+  <input type="text" id="hdUrl" placeholder="https://example.com">
+  <button onclick="getHeaders()"><i class="fas fa-search"></i> Check Headers</button>
+  <div id="hdResult" class="result-box">Headers will appear here...</div>
+  <div class="btn-group"><button onclick="clearResult('hdResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="domainip" class="page">
+  <h2><i class="fas fa-globe"></i> Domain IP</h2>
+  <label>Domain</label>
+  <input type="text" id="domInput" placeholder="google.com">
+  <button onclick="getDomainIP()"><i class="fas fa-search"></i> Check IP</button>
+  <div id="domResult" class="result-box">Enter domain...</div>
+  <div class="btn-group"><button onclick="clearResult('domResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="geoip" class="page">
+  <h2><i class="fas fa-map-marked-alt"></i> GeoIP</h2>
+  <label>IP Address</label>
+  <input type="text" id="geoInput" placeholder="8.8.8.8">
+  <button onclick="getGeoIP()"><i class="fas fa-search"></i> Find Location</button>
+  <div id="geoResult" class="result-box">Enter IP...</div>
+  <div class="btn-group"><button onclick="clearResult('geoResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="dns" class="page">
+  <h2><i class="fas fa-server"></i> DNS Lookup</h2>
+  <label>Domain</label>
+  <input type="text" id="dnsInput" placeholder="example.com">
+  <label>Record Type</label>
+  <select id="dnsType">
+    <option value="A">A</option>
+    <option value="AAAA">AAAA</option>
+    <option value="CNAME">CNAME</option>
+    <option value="MX">MX</option>
+    <option value="NS">NS</option>
+    <option value="TXT">TXT</option>
+  </select>
+  <button onclick="dnsLookup()"><i class="fas fa-search"></i> Lookup DNS</button>
+  <div id="dnsResult" class="result-box">Enter domain...</div>
+  <div class="btn-group"><button onclick="clearResult('dnsResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="minify" class="page">
+  <h2><i class="fas fa-compress-alt"></i> HTML Minify</h2>
+  <label>HTML Code</label>
+  <textarea id="minifyInput" placeholder="<html><body><h1>Hello</h1></body></html>"></textarea>
+  <button onclick="minifyHTML()"><i class="fas fa-compress"></i> Minify</button>
+  <textarea id="minifyResult" placeholder="Minified result..." readonly></textarea>
+  <div class="btn-group">
+    <button onclick="copyText('minifyResult')"><i class="fas fa-copy"></i> Copy</button>
+    <button onclick="clearResult('minifyResult')"><i class="fas fa-eraser"></i> Clear</button>
+  </div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="subdomain" class="page">
+  <h2><i class="fas fa-sitemap"></i> Subdomain Finder</h2>
+  <label>Domain</label>
+  <input type="text" id="subInput" placeholder="example.com">
+  <button onclick="findSubdomain()"><i class="fas fa-search"></i> Scan Subdomain</button>
+  <div id="subResult" class="result-box">Enter domain...</div>
+  <div class="btn-group"><button onclick="clearResult('subResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="crawler" class="page">
+  <h2><i class="fas fa-spider"></i> Endpoint Crawler</h2>
+  <label>URL</label>
+  <input type="text" id="crawlUrl" placeholder="https://example.com">
+  <button onclick="crawlEndpoint()"><i class="fas fa-play"></i> Crawl</button>
+  <div id="crawlResult" class="result-box">Enter URL...</div>
+  <div class="btn-group">
+    <button onclick="copyText('crawlResult')"><i class="fas fa-copy"></i> Copy</button>
+    <button onclick="clearResult('crawlResult')"><i class="fas fa-eraser"></i> Clear</button>
+  </div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="hash" class="page">
+  <h2><i class="fas fa-hashtag"></i> Hash Generator</h2>
+  <label>Input Text</label>
+  <input type="text" id="hashInput" placeholder="Text to hash">
+  <label>Hash Type</label>
+  <select id="hashType">
+    <option value="md5">MD5</option>
+    <option value="sha1">SHA1</option>
+    <option value="sha256">SHA256</option>
+    <option value="sha512">SHA512</option>
+  </select>
+  <button onclick="generateHash()"><i class="fas fa-cog"></i> Generate Hash</button>
+  <div id="hashResult" class="result-box">Enter text...</div>
+  <div class="btn-group"><button onclick="clearResult('hashResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="converter" class="page">
+  <h2><i class="fas fa-exchange-alt"></i> Text Converter</h2>
+  <label>Input Text</label>
+  <input type="text" id="convInput" placeholder="Text to convert">
+  <label>Convert To</label>
+  <select id="convType">
+    <option value="ascii">ASCII</option>
+    <option value="binary">Binary</option>
+    <option value="base64">Base64</option>
+    <option value="hex">Hex</option>
+  </select>
+  <button onclick="convertText()"><i class="fas fa-sync"></i> Convert</button>
+  <div id="convResult" class="result-box">Enter text...</div>
+  <div class="btn-group"><button onclick="clearResult('convResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="reverseip" class="page">
+  <h2><i class="fas fa-undo-alt"></i> Reverse IP Lookup</h2>
+  <label>Domain or IP</label>
+  <input type="text" id="revInput" placeholder="example.com or 1.1.1.1">
+  <button onclick="reverseIP()"><i class="fas fa-search"></i> Scan Reverse IP</button>
+  <div id="revResult" class="result-box">Enter domain/IP...</div>
+  <div class="btn-group"><button onclick="clearResult('revResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="jso" class="page">
+  <h2><i class="fas fa-code-branch"></i> JSO Generator</h2>
+  <label>HTML / Text</label>
+  <textarea id="jsoInput" placeholder="<div>Hello</div>"></textarea>
+  <button onclick="generateJSO()"><i class="fas fa-cog"></i> Generate JSO</button>
+  <textarea id="jsoResult" placeholder="JSO result..." readonly></textarea>
+  <div class="btn-group">
+    <button onclick="copyText('jsoResult')"><i class="fas fa-copy"></i> Copy</button>
+    <button onclick="clearResult('jsoResult')"><i class="fas fa-eraser"></i> Clear</button>
+  </div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="admin" class="page">
+  <h2><i class="fas fa-user-secret"></i> Admin Finder</h2>
+  <label>URL</label>
+  <input type="text" id="adminUrl" placeholder="http://example.com">
+  <button onclick="findAdmin()"><i class="fas fa-search"></i> Scan Admin</button>
+  <div id="adminResult" class="result-box">Enter URL...</div>
+  <div class="btn-group"><button onclick="clearResult('adminResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="phpobf" class="page">
+  <h2><i class="fab fa-php"></i> PHP Obfuscator</h2>
+  <label>PHP Code</label>
+  <textarea id="phpInput" placeholder="<?php echo 'Hello'; ?>"></textarea>
+  <label>Level</label>
+  <select id="phpLevel">
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+  </select>
+  <button onclick="obfuscatePHP()"><i class="fas fa-random"></i> Obfuscate</button>
+  <textarea id="phpResult" placeholder="Obfuscated result..." readonly></textarea>
+  <div class="btn-group">
+    <button onclick="copyText('phpResult')"><i class="fas fa-copy"></i> Copy</button>
+    <button onclick="clearResult('phpResult')"><i class="fas fa-eraser"></i> Clear</button>
+  </div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="csrf" class="page">
+  <h2><i class="fas fa-shield-alt"></i> CSRF Test</h2>
+  <label>Target URL</label>
+  <input type="text" id="csrfUrl" placeholder="https://target.com/upload.php">
+  <label>Field Name</label>
+  <input type="text" id="csrfField" placeholder="file">
+  <label>Cookie (optional)</label>
+  <input type="text" id="csrfCookie" placeholder="PHPSESSID=abc123">
+  <label>Custom Headers (one per line)</label>
+  <textarea id="csrfHeaders" placeholder="X-CSRF-Token: 12345"></textarea>
+  <button onclick="csrfTest()"><i class="fas fa-bolt"></i> Send Exploit</button>
+  <div id="csrfResult" class="result-box">Enter target URL...</div>
+  <div class="btn-group"><button onclick="clearResult('csrfResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="hideAllPages()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+<div id="dos" class="page">
+  <h2><i class="fas fa-bolt"></i> Layer7 DoS</h2>
+  <label>Target URL</label>
+  <input type="text" id="dosUrl" placeholder="https://example.com">
+  <label>Duration (seconds)</label>
+  <input type="number" id="dosDuration" placeholder="60" value="30">
+  <button onclick="startDOS()"><i class="fas fa-play"></i> Start Attack</button>
+  <div id="dosResult" class="result-box">Ready to attack...</div>
+  <div class="btn-group"><button onclick="clearResult('dosResult')"><i class="fas fa-eraser"></i> Clear</button></div>
+  <button class="back-btn" onclick="stopDOS(); hideAllPages()"><i class="fas fa-stop"></i> Stop & Back</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
